@@ -54,4 +54,11 @@ public class LinkedListTest {
         assertNotEquals(testList, new LinkedList<Integer>(null));
         assertNotEquals(testList, new LinkedList<Integer>(null, null));
     }
+
+    @Test
+    public void testSize() throws Exception {
+        assertEquals(0, new LinkedList<Integer>().size());
+        assertEquals(1, new LinkedList<Integer>(1).size());
+        assertEquals(2, new LinkedList<Integer>(1, 2).size());
+    }
 }

@@ -76,4 +76,14 @@ public class LinkedList<T> {
             return true;
         } else return false;
     }
+
+    public int size() {
+        int len = 0;
+        Node<T> node = head;
+        while (node != null) {
+            len++;
+            node = node.next;
+        }
+        return len;
+    }
 }
