@@ -86,4 +86,20 @@ public class LinkedList<T> {
         }
         return len;
     }
+
+    public void removeDuplicates() {
+        Node<T> node = head;
+        while (node != null) {
+            Node<T> next = node.next;
+            Node<T> prev = node;
+            while (next != null) {
+                if (Objects.equals(node, next)) prev.next = next.next;
+                else prev = next;
+
+                next = next.next;
+            }
+
+            node = node.next;
+        }
+    }
 }

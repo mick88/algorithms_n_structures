@@ -2,7 +2,6 @@ package com.michaldabski.linked_lists.tests;
 
 
 import com.michaldabski.linked_lists.LinkedList;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -60,5 +59,32 @@ public class LinkedListTest {
         assertEquals(0, new LinkedList<Integer>().size());
         assertEquals(1, new LinkedList<Integer>(1).size());
         assertEquals(2, new LinkedList<Integer>(1, 2).size());
+    }
+
+    @Test
+    public void testRemoveDuplicates() throws Exception {
+        LinkedList<Integer> testList = new LinkedList<Integer>(1, 2, 3, 4, 3);
+
+        assertNotEquals(new LinkedList<Integer>(1, 2, 3, 4), testList);
+        testList.removeDuplicates();
+        assertEquals(new LinkedList<Integer>(1, 2, 3, 4), testList);
+    }
+
+    @Test
+    public void testRemoveDuplicatesAdjacent() throws Exception {
+        LinkedList<Integer> testList = new LinkedList<Integer>(1, 2, 3, 3, 4);
+
+        assertNotEquals(new LinkedList<Integer>(1, 2, 3, 4), testList);
+        testList.removeDuplicates();
+        assertEquals(new LinkedList<Integer>(1, 2, 3, 4), testList);
+    }
+
+    @Test
+    public void testRemoveDuplicatesAll() throws Exception {
+        LinkedList<Integer> testList = new LinkedList<Integer>(1, 1, 1, 1, 1);
+
+        assertNotEquals(new LinkedList<Integer>(1), testList);
+        testList.removeDuplicates();
+        assertEquals(new LinkedList<Integer>(1), testList);
     }
 }
