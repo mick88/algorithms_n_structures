@@ -159,4 +159,11 @@ public class LinkedList<T> {
 
         return this;
     }
+
+    public Node<T> getLastNode() {
+        if (head == null) return null;
+        Node<T> node = head;
+        while (node.next != null) node = node.next;
+        return node;
+    }
 }

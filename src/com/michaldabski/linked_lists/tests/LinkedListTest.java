@@ -91,32 +91,36 @@ public class LinkedListTest {
     public void testGetItem() throws Exception {
         LinkedList<Integer> testList = new LinkedList<Integer>(1, 2, 3, 4, 5, 6);
 
-        assertEquals(1, (int)testList.getItem(0));
-        assertEquals(2, (int)testList.getItem(1));
-        assertEquals(3, (int)testList.getItem(2));
-        assertEquals(4, (int)testList.getItem(3));
-        assertEquals(5, (int)testList.getItem(4));
-        assertEquals(6, (int)testList.getItem(5));
+        assertEquals(1, (int) testList.getItem(0));
+        assertEquals(2, (int) testList.getItem(1));
+        assertEquals(3, (int) testList.getItem(2));
+        assertEquals(4, (int) testList.getItem(3));
+        assertEquals(5, (int) testList.getItem(4));
+        assertEquals(6, (int) testList.getItem(5));
 
         try {
             testList.getItem(6);
             fail("Exception should be thrown for index out of bounds");
-        } catch (IndexOutOfBoundsException ignored){}
+        } catch (IndexOutOfBoundsException ignored) {
+        }
 
         try {
             testList.getItem(-1);
             fail("Exception should be thrown for index -1");
-        } catch (IndexOutOfBoundsException ignored){}
+        } catch (IndexOutOfBoundsException ignored) {
+        }
 
         try {
             testList.getItem(10);
             fail("Exception should be thrown for index out of bounde");
-        } catch (IndexOutOfBoundsException ignored){}
+        } catch (IndexOutOfBoundsException ignored) {
+        }
 
         try {
             new LinkedList<Integer>().getItem(0);
             fail("Exception should be thrown for getItem() if list is empty");
-        } catch (IndexOutOfBoundsException ignored){}
+        } catch (IndexOutOfBoundsException ignored) {
+        }
     }
 
     @Test
@@ -129,7 +133,8 @@ public class LinkedListTest {
         try {
             list.deleteNode(null);
             fail("Null node should not be allowed");
-        } catch (NullPointerException ignored){}
+        } catch (NullPointerException ignored) {
+        }
 
         // deleting a foreign node should have no effect even if node with the same value exists
         list.deleteNode(new LinkedList.Node<Integer>(5));
@@ -161,5 +166,12 @@ public class LinkedListTest {
         assertEquals(new LinkedList<Integer>(1).artithmeticAdd(new LinkedList<Integer>(5, 9, 2, 4)), new LinkedList<Integer>(6, 9, 2, 4));
         assertEquals(new LinkedList<Integer>(5, 9, 2, 4).artithmeticAdd(new LinkedList<Integer>(0)), new LinkedList<Integer>(5, 9, 2, 4));
         assertEquals(new LinkedList<Integer>(5, 9, 2, 4).artithmeticAdd(new LinkedList<Integer>(1)), new LinkedList<Integer>(6, 9, 2, 4));
+    }
+
+    @Test
+    public void testGetLastNode() throws Exception {
+        LinkedList<Integer> list = new LinkedList<Integer>(1, 2, 3, 4, 5, 6);
+        assertEquals(6, (int) list.getLastNode().getData());
+        assertNull(new LinkedList<Integer>().getLastNode());
     }
 }
