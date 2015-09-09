@@ -159,13 +159,13 @@ public class LinkedListTest {
 
     @Test
     public void testArithmeticAdd() throws Exception {
-        assertEquals(new LinkedList<Integer>(3, 1, 5).artithmeticAdd(new LinkedList<Integer>(5, 9, 2)), new LinkedList<Integer>(8, 0, 8));
-        assertEquals(new LinkedList<Integer>(3, 1, 5, 4).artithmeticAdd(new LinkedList<Integer>(5, 9, 2)), new LinkedList<Integer>(8, 0, 8, 4));
-        assertEquals(new LinkedList<Integer>(3, 1, 5).artithmeticAdd(new LinkedList<Integer>(5, 9, 2, 4)), new LinkedList<Integer>(8, 0, 8, 4));
-        assertEquals(new LinkedList<Integer>(0).artithmeticAdd(new LinkedList<Integer>(5, 9, 2, 4)), new LinkedList<Integer>(5, 9, 2, 4));
-        assertEquals(new LinkedList<Integer>(1).artithmeticAdd(new LinkedList<Integer>(5, 9, 2, 4)), new LinkedList<Integer>(6, 9, 2, 4));
-        assertEquals(new LinkedList<Integer>(5, 9, 2, 4).artithmeticAdd(new LinkedList<Integer>(0)), new LinkedList<Integer>(5, 9, 2, 4));
-        assertEquals(new LinkedList<Integer>(5, 9, 2, 4).artithmeticAdd(new LinkedList<Integer>(1)), new LinkedList<Integer>(6, 9, 2, 4));
+        assertEquals(new LinkedList<Integer>(3, 1, 5).arithmeticAdd(new LinkedList<Integer>(5, 9, 2)), new LinkedList<Integer>(8, 0, 8));
+        assertEquals(new LinkedList<Integer>(3, 1, 5, 4).arithmeticAdd(new LinkedList<Integer>(5, 9, 2)), new LinkedList<Integer>(8, 0, 8, 4));
+        assertEquals(new LinkedList<Integer>(3, 1, 5).arithmeticAdd(new LinkedList<Integer>(5, 9, 2, 4)), new LinkedList<Integer>(8, 0, 8, 4));
+        assertEquals(new LinkedList<Integer>(0).arithmeticAdd(new LinkedList<Integer>(5, 9, 2, 4)), new LinkedList<Integer>(5, 9, 2, 4));
+        assertEquals(new LinkedList<Integer>(1).arithmeticAdd(new LinkedList<Integer>(5, 9, 2, 4)), new LinkedList<Integer>(6, 9, 2, 4));
+        assertEquals(new LinkedList<Integer>(5, 9, 2, 4).arithmeticAdd(new LinkedList<Integer>(0)), new LinkedList<Integer>(5, 9, 2, 4));
+        assertEquals(new LinkedList<Integer>(5, 9, 2, 4).arithmeticAdd(new LinkedList<Integer>(1)), new LinkedList<Integer>(6, 9, 2, 4));
     }
 
     @Test

@@ -140,7 +140,7 @@ public class LinkedList<T> {
      *
      * @return this
      */
-    public LinkedList<T> artithmeticAdd(LinkedList<Integer> otherList) {
+    public LinkedList<T> arithmeticAdd(LinkedList<Integer> otherList) {
         Node<Integer> thisNode = (Node<Integer>) this.head;
         Node<Integer> otherNode = otherList.head;
         int overflow = 0;
