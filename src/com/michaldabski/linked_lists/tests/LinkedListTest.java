@@ -118,4 +118,37 @@ public class LinkedListTest {
             fail("Exception should be thrown for getItem() if list is empty");
         } catch (IndexOutOfBoundsException ignored){}
     }
+
+    @Test
+    public void testDeleteNode() throws Exception {
+        LinkedList<Integer> list = new LinkedList<Integer>(1, 2, 3, 4, 5, 6);
+        final LinkedList.Node<Integer> head = list.head;
+        final LinkedList.Node<Integer> node3 = head.next.next;
+        final LinkedList.Node<Integer> node6 = node3.next.next.next;
+
+        try {
+            list.deleteNode(null);
+            fail("Null node should not be allowed");
+        } catch (NullPointerException ignored){}
+
+        // deleting a foreign node should have no effect even if node with the same value exists
+        list.deleteNode(new LinkedList.Node<Integer>(5));
+        assertEquals(new LinkedList<Integer>(1, 2, 3, 4, 5, 6), list);
+
+        // deleting node from the middle
+        list.deleteNode(node3);
+        assertEquals(new LinkedList<Integer>(1, 2, 4, 5, 6), list);
+
+        // deleting head
+        list.deleteNode(head);
+        assertEquals(new LinkedList<Integer>(2, 4, 5, 6), list);
+
+        // deleting last node
+        list.deleteNode(node6);
+        assertEquals(new LinkedList<Integer>(2, 4, 5), list);
+
+        // deleting from an empty list should raise no exceptions
+        new LinkedList<Integer>().deleteNode(head);
+
+    }
 }

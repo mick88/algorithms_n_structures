@@ -6,11 +6,11 @@ import java.util.Objects;
  * Created by Michal on 08/09/2015.
  */
 public class LinkedList<T> {
-    static class Node<T> {
-        Node<T> next;
+    public static class Node<T> {
+        public Node<T> next;
         final T data;
 
-        Node(T data) {
+        public Node(T data) {
             this.data = data;
         }
 
@@ -38,7 +38,7 @@ public class LinkedList<T> {
         }
     }
 
-    Node<T> head = null;
+    public Node<T> head = null;
 
     public LinkedList(T... values) {
         if (values == null) addValue(null);
@@ -111,6 +111,25 @@ public class LinkedList<T> {
             }
 
             node = node.next;
+        }
+    }
+
+    /**
+     * Remove specified node from the list
+     */
+    public void deleteNode(Node<T> delete) {
+        if (delete == null) throw new NullPointerException();
+        if (delete == head) {
+            head = delete.next;
+        } else {
+            Node<T> node = head;
+            do {
+                if (node == null) return;
+                if (node.next == delete) {
+                    node.next = delete.next;
+                    return;
+                }
+            } while ((node = node.next) != null);
         }
     }
 }
