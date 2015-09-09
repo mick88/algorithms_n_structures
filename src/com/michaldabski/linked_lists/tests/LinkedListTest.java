@@ -4,8 +4,7 @@ package com.michaldabski.linked_lists.tests;
 import com.michaldabski.linked_lists.LinkedList;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 /**
  * Created by Michal on 08/09/2015.
@@ -86,5 +85,37 @@ public class LinkedListTest {
         assertNotEquals(new LinkedList<Integer>(1), testList);
         testList.removeDuplicates();
         assertEquals(new LinkedList<Integer>(1), testList);
+    }
+
+    @Test
+    public void testGetItem() throws Exception {
+        LinkedList<Integer> testList = new LinkedList<Integer>(1, 2, 3, 4, 5, 6);
+
+        assertEquals(1, (int)testList.getItem(0));
+        assertEquals(2, (int)testList.getItem(1));
+        assertEquals(3, (int)testList.getItem(2));
+        assertEquals(4, (int)testList.getItem(3));
+        assertEquals(5, (int)testList.getItem(4));
+        assertEquals(6, (int)testList.getItem(5));
+
+        try {
+            testList.getItem(6);
+            fail("Exception should be thrown for index out of bounds");
+        } catch (IndexOutOfBoundsException ignored){}
+
+        try {
+            testList.getItem(-1);
+            fail("Exception should be thrown for index -1");
+        } catch (IndexOutOfBoundsException ignored){}
+
+        try {
+            testList.getItem(10);
+            fail("Exception should be thrown for index out of bounde");
+        } catch (IndexOutOfBoundsException ignored){}
+
+        try {
+            new LinkedList<Integer>().getItem(0);
+            fail("Exception should be thrown for getItem() if list is empty");
+        } catch (IndexOutOfBoundsException ignored){}
     }
 }

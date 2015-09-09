@@ -87,6 +87,17 @@ public class LinkedList<T> {
         return len;
     }
 
+    public T getItem(int position) {
+        if (position < 0) throw new IndexOutOfBoundsException(String.valueOf(position));
+        Node<T> item = head;
+        for (int i = 0; i < position; i++) {
+            if (item == null) throw new IndexOutOfBoundsException(String.valueOf(position));
+            item = item.next;
+        }
+        if (item == null) throw new IndexOutOfBoundsException(String.valueOf(position));
+        return item.getData();
+    }
+
     public void removeDuplicates() {
         Node<T> node = head;
         while (node != null) {
