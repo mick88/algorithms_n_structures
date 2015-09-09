@@ -8,7 +8,7 @@ import java.util.Objects;
 public class LinkedList<T> {
     public static class Node<T> {
         public Node<T> next;
-        final T data;
+        T data;
 
         public Node(T data) {
             this.data = data;
@@ -131,5 +131,32 @@ public class LinkedList<T> {
                 }
             } while ((node = node.next) != null);
         }
+    }
+
+    /**
+     * Perform arithmetic addition against another list
+     * where each item is a digit.
+     * Mutates this list to become the result
+     *
+     * @return this
+     */
+    public LinkedList<T> artithmeticAdd(LinkedList<Integer> otherList) {
+        Node<Integer> thisNode = (Node<Integer>) this.head;
+        Node<Integer> otherNode = otherList.head;
+        int overflow = 0;
+
+        do {
+            thisNode.data += overflow + otherNode.data;
+            overflow = thisNode.data / 10;
+            thisNode.data %= 10;
+            otherNode = otherNode.next;
+            if (otherNode != null && thisNode.next == null) {
+                // if this list is too short, add new digit at the end
+                thisNode.next = new Node<Integer>(0);
+            }
+            thisNode = thisNode.next;
+        } while (otherNode != null || overflow > 0);
+
+        return this;
     }
 }
