@@ -1,6 +1,8 @@
 package com.michaldabski.linked_lists;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Created by Michal on 08/09/2015.
@@ -165,5 +167,19 @@ public class LinkedList<T> {
         Node<T> node = head;
         while (node.next != null) node = node.next;
         return node;
+    }
+
+    /**
+     * Finds loop in the linked list and returns first node in the loop
+     */
+    public Node<T> getBeginningOfLoop() {
+        Set<Node<T>> visitedNodes = new HashSet<Node<T>>();
+        Node<T> node = head;
+        while (node != null) {
+            if (visitedNodes.contains(node)) return node;
+            visitedNodes.add(node);
+            node = node.next;
+        }
+        return null;
     }
 }
