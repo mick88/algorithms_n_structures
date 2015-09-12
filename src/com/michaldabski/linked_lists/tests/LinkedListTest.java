@@ -189,4 +189,15 @@ public class LinkedListTest {
         // non-looped list
         assertNull(new LinkedList<Integer>(1, 2, 3).getBeginningOfLoop());
     }
+
+    @Test
+    public void testGetNthToLastItem() throws Exception {
+        LinkedList<Integer> list = new LinkedList<Integer>(1, 2, 3, 4, 5, 6);
+        assertEquals(6, (int)list.getNthToLastItem(1));
+        assertEquals(5, (int)list.getNthToLastItem(2));
+        assertEquals(4, (int)list.getNthToLastItem(3));
+
+        list = new LinkedList<Integer>(1);
+        assertEquals(1, (int)list.getNthToLastItem(1));
+    }
 }

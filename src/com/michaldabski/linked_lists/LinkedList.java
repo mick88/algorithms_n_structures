@@ -89,6 +89,26 @@ public class LinkedList<T> {
         return len;
     }
 
+    public T getNthToLastItem(int n) {
+        // marks current node
+        Node<T> current = head;
+        // marks n nodes ahead
+        Node<T> last = head;
+
+        // move last pointer n steps ahead
+        for (int i = 1; i < n; i++) {
+            last = last.next;
+        }
+
+        // while last isnt actually last
+        while (last.next != null) {
+            last = last.next;
+            current = current.next;
+        }
+
+        return current.data;
+    }
+
     public T getItem(int position) {
         if (position < 0) throw new IndexOutOfBoundsException(String.valueOf(position));
         Node<T> item = head;
