@@ -121,6 +121,12 @@ public class LinkedList<T> {
      */
     public void deleteNode(Node<T> delete) {
         if (delete == null) throw new NullPointerException();
+        if (delete.next != null) {
+            delete.data = delete.next.data;
+            delete.next = delete.next.next;
+            return;
+        }
+
         if (delete == head) {
             head = delete.next;
         } else {
