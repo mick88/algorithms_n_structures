@@ -191,6 +191,20 @@ public class LinkedListTest {
     }
 
     @Test
+    public void testGetBeginningOfLoop2() throws Exception {
+        LinkedList<Integer> list = new LinkedList<Integer>(1, 2, 3, 4, 5, 6);
+        final LinkedList.Node<Integer> loop = list.head.next.next.next; //4
+        list.getLastNode().next = loop;
+        assertSame(loop, list.getBeginningOfLoop2());
+        assertEquals(4, (int) list.getBeginningOfLoop2().getData());
+
+        // empty list
+        assertNull(new LinkedList<Integer>().getBeginningOfLoop2());
+        // non-looped list
+        assertNull(new LinkedList<Integer>(1, 2, 3).getBeginningOfLoop2());
+    }
+
+    @Test
     public void testGetNthToLastItem() throws Exception {
         LinkedList<Integer> list = new LinkedList<Integer>(1, 2, 3, 4, 5, 6);
         assertEquals(6, (int)list.getNthToLastItem(1));

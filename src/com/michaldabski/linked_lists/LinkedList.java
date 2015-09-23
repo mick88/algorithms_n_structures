@@ -208,4 +208,35 @@ public class LinkedList<T> {
         }
         return null;
     }
+
+    /**
+     * Finds loop in the linked list and returns first node in the loop
+     * More efficient implementation
+     *
+     * This implementation uses two iterators, n1 visits nodes one by one, while n2 skips every other node.
+     * Once the two iterators meet, n1 is sent back to the beginning of the list and both iterators are re-started
+     * going at the same pace of one-by-one. The node where they meet is the start of the loop.
+     */
+    public Node<T> getBeginningOfLoop2() {
+        Node<T> n1 = head;
+        Node<T> n2 = head;
+        while (n2 != null) {
+            n1 = n1.next;
+            if (n2.next == null) return null;
+            n2 = n2.next.next;
+
+            if (n2 == n1) break;
+        }
+
+        if (n2 == null) return null;
+
+        n1 = head;
+
+        while (n1 != n2) {
+            n1 = n1.next;
+            n2 = n2.next;
+        }
+
+        return n1;
+    }
 }
