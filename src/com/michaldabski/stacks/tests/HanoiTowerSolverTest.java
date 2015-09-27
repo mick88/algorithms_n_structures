@@ -1,5 +1,7 @@
-package com.michaldabski.stacks;
+package com.michaldabski.stacks.tests;
 
+import com.michaldabski.stacks.HanoiTowerSolver;
+import com.michaldabski.stacks.HanoiTowers;
 import junit.framework.TestCase;
 
 /**
