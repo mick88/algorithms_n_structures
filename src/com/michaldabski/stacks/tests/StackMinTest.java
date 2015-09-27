@@ -1,5 +1,6 @@
-package com.michaldabski.stacks;
+package com.michaldabski.stacks.tests;
 
+import com.michaldabski.stacks.StackMin;
 import junit.framework.TestCase;
 
 /**
