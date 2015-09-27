@@ -1,4 +1,4 @@
-package com.michaldabski.stacks;
+package com.michaldabski.stacks.hanoi;
 
 /**
  * Created by Michal on 27/09/2015.

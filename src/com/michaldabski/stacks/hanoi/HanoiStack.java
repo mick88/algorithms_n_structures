@@ -1,4 +1,4 @@
-package com.michaldabski.stacks;
+package com.michaldabski.stacks.hanoi;
 
 import java.util.Stack;
 

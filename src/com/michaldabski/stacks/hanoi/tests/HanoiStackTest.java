@@ -1,6 +1,6 @@
-package com.michaldabski.stacks.tests;
+package com.michaldabski.stacks.hanoi.tests;
 
-import com.michaldabski.stacks.HanoiStack;
+import com.michaldabski.stacks.hanoi.HanoiStack;
 import junit.framework.TestCase;
 
 /**
