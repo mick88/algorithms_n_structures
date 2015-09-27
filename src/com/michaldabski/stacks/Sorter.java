@@ -14,26 +14,23 @@ public class Sorter<T extends Comparable<T>> {
         this.stack = stack;
     }
 
-    public void sort() {
-        final Stack<T> tmp = new Stack<T>();
+    private void sortRecursively() {
+        if (stack.size() < 2) return;
 
-        while (!isSorted()) {
-            T value = null;
-            while (!stack.empty()) {
-                if (value == null) value = stack.pop();
+        T value = stack.pop();
+        sort();
 
-                if (stack.isEmpty() || value.compareTo(stack.peek()) < 0) { // value smaller than the one on stack
-                    tmp.push(value);
-                    value = null;
-                } else {
-                    tmp.push(stack.pop());
-                }
-            }
-            if (value != null) tmp.push(value);
-
-            while (!tmp.isEmpty()) stack.push(tmp.pop());
+        if (value.compareTo(stack.peek()) > 0) {
+            final T tmp = value;
+            value = stack.pop();
+            stack.push(tmp);
         }
+        stack.push(value);
+    }
 
+    public void sort() {
+        while (!isSorted())
+            sortRecursively();
     }
 
     public boolean isSorted() {
