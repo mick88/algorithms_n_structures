@@ -37,21 +37,14 @@ public class Sorter<T extends Comparable<T>> {
     }
 
     public boolean isSorted() {
-        boolean result = true;
-
-        final Stack<T> tmp = new Stack<T>();
-        T last = null;
-
-        while (!stack.empty()) {
-            T value = tmp.push(stack.pop());
-            if (last != null && last.compareTo(value) > 0) {
-                result = false;
-                break;
+        if (stack.isEmpty()) return true;
+        else {
+            final T value = stack.pop();
+            try {
+                return stack.isEmpty() || (value.compareTo(stack.peek()) <= 0 && isSorted());
+            } finally {
+                stack.push(value);
             }
-            last = value;
         }
-
-        while (!tmp.empty()) stack.push(tmp.pop());
-        return result;
     }
 }
