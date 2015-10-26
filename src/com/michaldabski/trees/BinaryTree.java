@@ -23,23 +23,32 @@ public class BinaryTree<T> {
         }
 
         /**
-         * Check whether child nodes below this node are balanced
-         *
-         * @param depth base depth of this node
-         * @return depth of furthest child, or -1 if children are not balanced
+         * Gets maximum depth of the child nodes below this node, inclusive
          */
-        int isBalanced(int depth) {
+        public int calculateMaxDepth() {
             if (left == null && right == null) {
-                // both children are null
-                return depth;
-            } else if (left == null || right == null) {
+                return 1;
+            } else if (left != null && right != null) {
+                return Math.max(left.calculateMaxDepth(), right.calculateMaxDepth()) + 1;
+            } else if (left != null) {
+                return left.calculateMaxDepth() + 1;
+            } else {
+                return right.calculateMaxDepth() + 1;
+            }
+        }
+
+        /**
+         * Gets minimum depth of the child nodes below this node, inclusive
+         */
+        public int calculateMinDepth() {
+            if (left == null || right == null) {
                 // either child is null
-                return -1;
+                return 1;
             } else {
                 // both children are not null
-                int leftDepth = left.isBalanced(depth + 1);
-                int rightDepth = right.isBalanced(depth + 1);
-                return leftDepth == rightDepth ? leftDepth : -1;
+                int leftMinDepth = left.calculateMinDepth();
+                int rightMinDepth = right.calculateMinDepth();
+                return Math.max(leftMinDepth, rightMinDepth) + 1;
             }
         }
 
@@ -55,9 +64,12 @@ public class BinaryTree<T> {
         this.root = root;
     }
 
+    /**
+     * Checks whether this tree is balanced by comparing minimum and maximum depth of the child nodes
+     */
     public boolean isBalanced() {
         if (root == null) return true;
-        return root.isBalanced(1) >= 1;
+        return root.calculateMaxDepth() - root.calculateMinDepth() <= 1;
     }
 
     @Override

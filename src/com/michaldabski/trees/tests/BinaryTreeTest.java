@@ -1,5 +1,6 @@
 package com.michaldabski.trees.tests;
 
+import com.michaldabski.linked_lists.LinkedList;
 import com.michaldabski.trees.BinaryTree;
 import junit.framework.TestCase;
 
@@ -32,14 +33,14 @@ public class BinaryTreeTest extends TestCase {
         BinaryTree.Node<Integer> root = new BinaryTree.Node<Integer>(5);
         root.setLeft(new BinaryTree.Node<Integer>(3));
         binaryTree.setRoot(root);
-        assertFalse(binaryTree.isBalanced());
+        assertTrue(binaryTree.isBalanced());
     }
 
     public void testIsBalanced_Right() throws Exception {
         BinaryTree.Node<Integer> root = new BinaryTree.Node<Integer>(5);
         root.setRight(new BinaryTree.Node<Integer>(3));
         binaryTree.setRoot(root);
-        assertFalse(binaryTree.isBalanced());
+        assertTrue(binaryTree.isBalanced());
     }
 
     public void testIsBalanced_balanced() throws Exception {
@@ -52,12 +53,14 @@ public class BinaryTreeTest extends TestCase {
 
     public void testIsBalanced_More() throws Exception {
         BinaryTree.Node<Integer> root = new BinaryTree.Node<Integer>(5);
+
         root.setRight(new BinaryTree.Node<Integer>(3));
+
         BinaryTree.Node<Integer> left = new BinaryTree.Node<Integer>(3);
         left.setRight(new BinaryTree.Node<Integer>(9));
         root.setLeft(left);
         binaryTree.setRoot(root);
-        assertFalse(binaryTree.isBalanced());
+        assertTrue(binaryTree.isBalanced());
     }
 
     public void testIsBalanced_More_Balanced() throws Exception {
@@ -70,7 +73,21 @@ public class BinaryTreeTest extends TestCase {
         root.setLeft(left);
 
         binaryTree.setRoot(root);
-        assertFalse(binaryTree.isBalanced());
+        assertTrue(binaryTree.isBalanced());
+    }
+
+    public void testIsBalanced_More_Unbalanced() throws Exception {
+        BinaryTree.Node<Integer> root = new BinaryTree.Node<Integer>(5);
+
+        BinaryTree.Node<Integer> left = new BinaryTree.Node<Integer>(3);
+        left.setRight(new BinaryTree.Node<Integer>(9));
+        BinaryTree.Node<Integer> left1 = new BinaryTree.Node<Integer>(9);
+        left1.setLeft(new BinaryTree.Node<Integer>(43));
+        left.setLeft(left1);
+        root.setLeft(left);
+
+        binaryTree.setRoot(root);
+        assertFalse(binaryTree.toString(), binaryTree.isBalanced());
     }
 
     public void testIsBalanced_Balanced_EdgeCase() throws Exception {
@@ -86,5 +103,23 @@ public class BinaryTreeTest extends TestCase {
 
         binaryTree.setRoot(root);
         assertTrue(String.format("Tree should be balanced: %s", binaryTree), binaryTree.isBalanced());
+    }
+
+    public void testCalculateMinDepth() throws Exception {
+        BinaryTree.Node<Integer> node = new BinaryTree.Node<Integer>(5);
+        assertEquals(1, node.calculateMinDepth());
+        node.setLeft(new BinaryTree.Node<Integer>(3));
+        assertEquals(1, node.calculateMinDepth());
+        node.setRight(new BinaryTree.Node<Integer>(3));
+        assertEquals(2, node.calculateMinDepth());
+    }
+
+    public void testCalculateMaxDepth() throws Exception {
+        BinaryTree.Node<Integer> node = new BinaryTree.Node<Integer>(5);
+        assertEquals(1, node.calculateMaxDepth());
+        node.setLeft(new BinaryTree.Node<Integer>(3));
+        assertEquals(2, node.calculateMaxDepth());
+        node.setRight(new BinaryTree.Node<Integer>(3));
+        assertEquals(2, node.calculateMaxDepth());
     }
 }
