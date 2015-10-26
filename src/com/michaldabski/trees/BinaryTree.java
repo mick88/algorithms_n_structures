@@ -4,7 +4,7 @@ package com.michaldabski.trees;
 /**
  * Created by Michal on 26/10/2015.
  */
-public class Tree<T> {
+public class BinaryTree<T> {
     public static class Node<T> {
         final T value;
         Node<T> left = null;
@@ -42,6 +42,11 @@ public class Tree<T> {
                 return leftDepth == rightDepth ? leftDepth : -1;
             }
         }
+
+        @Override
+        public String toString() {
+            return String.format("%s [%s, %s]", value, left, right);
+        }
     }
 
     Node<T> root = null;
@@ -53,5 +58,10 @@ public class Tree<T> {
     public boolean isBalanced() {
         if (root == null) return true;
         return root.isBalanced(1) >= 1;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s]", root);
     }
 }
