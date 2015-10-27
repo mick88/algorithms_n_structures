@@ -1,6 +1,5 @@
 package com.michaldabski.trees.tests;
 
-import com.michaldabski.linked_lists.LinkedList;
 import com.michaldabski.trees.BinaryTree;
 import junit.framework.TestCase;
 
@@ -121,5 +120,30 @@ public class BinaryTreeTest extends TestCase {
         assertEquals(2, node.calculateMaxDepth());
         node.setRight(new BinaryTree.Node<Integer>(3));
         assertEquals(2, node.calculateMaxDepth());
+    }
+
+    public void testFromArray() throws Exception {
+        try {
+            BinaryTree.fromArray(1, 2, 3, 4, 5, 4);
+            fail("Array should not be allowed");
+        } catch (IllegalStateException ignored) {
+        }
+
+        final BinaryTree<Integer> tree = BinaryTree.fromArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+
+        System.out.println(tree);
+        assertEquals(15, tree.size());
+        assertTrue(tree.isBalanced());
+        assertEquals(4, tree.getRoot().calculateMaxDepth());
+    }
+
+    public void testSize() throws Exception {
+        assertEquals(0, binaryTree.size());
+        final BinaryTree.Node<Integer> root = new BinaryTree.Node<Integer>(2);
+        binaryTree.setRoot(root);
+        assertEquals(1, binaryTree.size());
+        root.setLeft(new BinaryTree.Node<Integer>(4));
+        root.setRight(new BinaryTree.Node<Integer>(5));
+        assertEquals(3, binaryTree.size());
     }
 }

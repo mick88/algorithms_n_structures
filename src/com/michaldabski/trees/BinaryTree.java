@@ -1,6 +1,8 @@
 package com.michaldabski.trees;
 
 
+import java.util.Arrays;
+
 /**
  * Created by Michal on 26/10/2015.
  */
@@ -56,12 +58,38 @@ public class BinaryTree<T> {
         public String toString() {
             return String.format("%s [%s, %s]", value, left, right);
         }
+
+        public int size() {
+            int size = 1;
+            if (left != null) size += left.size();
+            if (right != null) size += right.size();
+            return size;
+        }
+
+        static <T> Node<T> nodeFromArray(T... values) {
+            final int mid = values.length / 2;
+            Node<T> node = new Node<T>(values[mid]);
+            if (mid > 0) {
+                final T[] leftValues = Arrays.copyOf(values, mid);
+                node.setLeft(nodeFromArray(leftValues));
+            }
+            if (mid < values.length - 1) {
+                final T[] rightValues = Arrays.copyOfRange(values, mid + 1, values.length);
+                node.setRight(nodeFromArray(rightValues));
+            }
+
+            return node;
+        }
     }
 
     Node<T> root = null;
 
     public void setRoot(Node<T> root) {
         this.root = root;
+    }
+
+    public Node<T> getRoot() {
+        return root;
     }
 
     /**
@@ -75,5 +103,23 @@ public class BinaryTree<T> {
     @Override
     public String toString() {
         return String.format("[%s]", root);
+    }
+
+    /**
+     * Create balanced tree from sorted array
+     */
+    public static <T extends Comparable<T>> BinaryTree<T> fromArray(T... sortedArray) {
+        for (int i = 1; i < sortedArray.length; i++) {
+            if (sortedArray[i].compareTo(sortedArray[i - 1]) < 0)
+                throw new IllegalStateException("Expected array sorted in ascending order. Actual array: " + sortedArray.toString());
+        }
+
+        BinaryTree<T> tree = new BinaryTree<T>();
+        tree.setRoot(Node.nodeFromArray(sortedArray));
+        return tree;
+    }
+
+    public int size() {
+        return root == null ? 0 : root.size();
     }
 }
