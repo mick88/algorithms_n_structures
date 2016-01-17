@@ -212,4 +212,33 @@ public class BinaryTreeTest extends TestCase {
         assertSame(right.getLeft(), right.getNextNode());
         assertSame(right, left.getRight().getNextNode());
     }
+
+    public void testGetFirstCommonAncestor() throws Exception {
+        BinaryTree.Node<Integer> root = new BinaryTree.Node<Integer>(1);
+        binaryTree.setRoot(root);
+
+        BinaryTree.Node<Integer> left = new BinaryTree.Node<Integer>(2);
+        root.setLeft(left);
+        BinaryTree.Node<Integer> right = new BinaryTree.Node<Integer>(3);
+        root.setRight(right);
+
+        left.setLeft(new BinaryTree.Node<Integer>(4));
+        left.setRight(new BinaryTree.Node<Integer>(5));
+
+        right.setLeft(new BinaryTree.Node<Integer>(6));
+        BinaryTree.Node<Integer> lastNode = new BinaryTree.Node<Integer>(7);
+        right.setRight(lastNode);
+        BinaryTree.Node<Integer> extraNode = new BinaryTree.Node<Integer>(100);
+        lastNode.setRight(extraNode);
+
+        assertSame(root, root.getFirstCommonAncestor(root));
+        assertSame(root, left.getFirstCommonAncestor(right));
+        assertSame(root, right.getFirstCommonAncestor(left));
+        assertSame(root, right.getFirstCommonAncestor(root));
+        assertSame(root, root.getFirstCommonAncestor(left));
+        assertSame(left, left.getFirstCommonAncestor(left.getRight()));
+        assertSame(root, left.getRight().getFirstCommonAncestor(right.getRight()));
+        assertSame(root, extraNode.getFirstCommonAncestor(left.getRight()));
+        assertSame(root, left.getRight().getFirstCommonAncestor(extraNode));
+    }
 }

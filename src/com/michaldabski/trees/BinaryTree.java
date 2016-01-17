@@ -4,8 +4,9 @@ package com.michaldabski.trees;
 import com.michaldabski.linked_lists.LinkedList;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Michal on 26/10/2015.
@@ -43,6 +44,31 @@ public class BinaryTree<T> {
          */
         public Node<T> getNextNode() {
             return getNextNode(this);
+        }
+
+        public Node<T> getFirstCommonAncestor(Node<T> node) {
+            final Set<Node<T>> parents = node.getParents();
+            Node<T> thisNode = this;
+            while (thisNode != null) {
+                if (parents.contains(thisNode)) {
+                    return thisNode;
+                }
+                thisNode = thisNode.parent;
+            }
+            throw new RuntimeException(String.format("Could not find common ancestor for %s and %s", toString(), node));
+        }
+
+        /**
+         * Gets set of nodes from this node to the root, including this node
+         */
+        public Set<Node<T>> getParents() {
+            final Set<Node<T>> parents = new HashSet<Node<T>>();
+            Node<T> node = this;
+            while (node != null) {
+                parents.add(node);
+                node = node.parent;
+            }
+            return parents;
         }
 
         public void setLeft(Node<T> left) {
