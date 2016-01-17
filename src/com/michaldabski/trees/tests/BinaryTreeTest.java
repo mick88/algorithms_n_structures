@@ -1,5 +1,6 @@
 package com.michaldabski.trees.tests;
 
+import com.michaldabski.linked_lists.LinkedList;
 import com.michaldabski.trees.BinaryTree;
 import junit.framework.TestCase;
 
@@ -145,5 +146,47 @@ public class BinaryTreeTest extends TestCase {
         root.setLeft(new BinaryTree.Node<Integer>(4));
         root.setRight(new BinaryTree.Node<Integer>(5));
         assertEquals(3, binaryTree.size());
+    }
+
+    public void testGetLinkedLists() throws Exception {
+        BinaryTree.Node<Integer> root = new BinaryTree.Node<Integer>(1);
+
+        BinaryTree.Node<Integer> left = new BinaryTree.Node<Integer>(2);
+        root.setLeft(left);
+        BinaryTree.Node<Integer> right = new BinaryTree.Node<Integer>(3);
+        root.setRight(right);
+
+        left.setLeft(new BinaryTree.Node<Integer>(4));
+        left.setRight(new BinaryTree.Node<Integer>(5));
+
+        right.setLeft(new BinaryTree.Node<Integer>(6));
+        BinaryTree.Node<Integer> lastNode = new BinaryTree.Node<Integer>(7);
+        right.setRight(lastNode);
+        lastNode.setRight(new BinaryTree.Node<Integer>(100));
+        binaryTree.setRoot(root);
+
+        LinkedList<Integer>[] linkedLists = binaryTree.getLinkedLists();
+        assertEquals(linkedLists.length, 4);
+
+        LinkedList<Integer> rootList = linkedLists[0];
+        assertEquals(1, rootList.size());
+        assertEquals(1, (int) rootList.getItem(0));
+
+        LinkedList<Integer> secondLevelList = linkedLists[1];
+        assertEquals(secondLevelList.size(), 2);
+        assertEquals(2, (int)secondLevelList.getItem(0));
+        assertEquals(3, (int)secondLevelList.getItem(1));
+
+        LinkedList<Integer> thirdLevelList = linkedLists[2];
+        assertEquals(thirdLevelList.size(), 4);
+        System.out.println(thirdLevelList.toString());
+        assertEquals(4, (int)thirdLevelList.getItem(0));
+        assertEquals(5, (int)thirdLevelList.getItem(1));
+        assertEquals(6, (int)thirdLevelList.getItem(2));
+        assertEquals(7, (int)thirdLevelList.getItem(3));
+
+        LinkedList<Integer> lastLevelList = linkedLists[3];
+        assertEquals(lastLevelList.size(), 1);
+        assertEquals(100, (int)lastLevelList.getItem(0));
     }
 }

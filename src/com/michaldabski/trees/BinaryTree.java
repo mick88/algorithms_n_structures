@@ -1,7 +1,11 @@
 package com.michaldabski.trees;
 
 
+import com.michaldabski.linked_lists.LinkedList;
+
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Michal on 26/10/2015.
@@ -121,5 +125,28 @@ public class BinaryTree<T> {
 
     public int size() {
         return root == null ? 0 : root.size();
+    }
+
+    /**
+     * Gets linked list for values at each depth of the array
+     * @return array containing a linked list fo each depth level in this tree
+     */
+    public LinkedList<T>[] getLinkedLists() {
+        if (root == null) return new LinkedList[0];
+        // create linked lists and map level to the last node
+        final LinkedList[] linkedLists = new LinkedList[root.calculateMaxDepth()];
+        for (int i = 0; i < linkedLists.length; i++) {
+            linkedLists[i] = new LinkedList<T>();
+        }
+        populateLinkedLists(0, root, linkedLists);
+        return linkedLists;
+    }
+
+    protected void populateLinkedLists(int level, Node<T> node, LinkedList[] valuesList) {
+        if (node != null) {
+            valuesList[level].addValue(node.value);
+            populateLinkedLists(level + 1, node.left, valuesList);
+            populateLinkedLists(level + 1, node.right, valuesList);
+        }
     }
 }
