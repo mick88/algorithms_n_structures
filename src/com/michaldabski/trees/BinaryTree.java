@@ -25,9 +25,37 @@ public class BinaryTree<T> {
             return parent;
         }
 
+        protected Node<T> getNextNode(Node<T> after) {
+            if (left != null && left != after && right != after) {
+                return left;
+            } else if (right != null && right != after) {
+                return right;
+            } else if (parent != null) {
+                return parent.getNextNode(this);
+            } else {
+                return null;
+            }
+        }
+
+        /**
+         * Gets next node in order after this node.
+         * NULL if this is te last node.
+         */
+        public Node<T> getNextNode() {
+            return getNextNode(this);
+        }
+
         public void setLeft(Node<T> left) {
             this.left = left;
             left.setParent(this);
+        }
+
+        public Node<T> getLeft() {
+            return left;
+        }
+
+        public Node<T> getRight() {
+            return right;
         }
 
         public void setRight(Node<T> right) {

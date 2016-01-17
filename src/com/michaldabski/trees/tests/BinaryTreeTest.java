@@ -189,4 +189,27 @@ public class BinaryTreeTest extends TestCase {
         assertEquals(lastLevelList.size(), 1);
         assertEquals(100, (int)lastLevelList.getItem(0));
     }
+
+    public void testNextNode() throws Exception {
+        BinaryTree.Node<Integer> root = new BinaryTree.Node<Integer>(1);
+        binaryTree.setRoot(root);
+
+        BinaryTree.Node<Integer> left = new BinaryTree.Node<Integer>(2);
+        root.setLeft(left);
+        BinaryTree.Node<Integer> right = new BinaryTree.Node<Integer>(3);
+        root.setRight(right);
+
+        left.setLeft(new BinaryTree.Node<Integer>(4));
+        left.setRight(new BinaryTree.Node<Integer>(5));
+
+        right.setLeft(new BinaryTree.Node<Integer>(6));
+        BinaryTree.Node<Integer> lastNode = new BinaryTree.Node<Integer>(7);
+        right.setRight(lastNode);
+        lastNode.setRight(new BinaryTree.Node<Integer>(100));
+
+        assertSame(left, root.getNextNode());
+        assertSame(left.getLeft(), left.getNextNode());
+        assertSame(right.getLeft(), right.getNextNode());
+        assertSame(right, left.getRight().getNextNode());
+    }
 }
