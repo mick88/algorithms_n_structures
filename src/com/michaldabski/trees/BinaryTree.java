@@ -15,13 +15,24 @@ public class BinaryTree<T> {
         final T value;
         Node<T> left = null;
         Node<T> right = null;
+        Node<T> parent = null;
+
+        public void setParent(Node<T> parent) {
+            this.parent = parent;
+        }
+
+        public Node<T> getParent() {
+            return parent;
+        }
 
         public void setLeft(Node<T> left) {
             this.left = left;
+            left.setParent(this);
         }
 
         public void setRight(Node<T> right) {
             this.right = right;
+            right.setParent(this);
         }
 
         public Node(T value) {
